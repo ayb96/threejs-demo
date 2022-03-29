@@ -11,15 +11,17 @@ const canvas = document.querySelector("canvas.webgl");
 
 // Scene
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0xb5b0b0);
+scene.background = new THREE.Color(0xcdc7b7);
 // Map
 const geometry = new THREE.PlaneBufferGeometry(100, 100);
 geometry.rotateX(4.7);
-var texture1 = new THREE.TextureLoader().load("/replace.jpg");
-// const height = loader.load("/displ.jpg");
+var texture1 = new THREE.TextureLoader().load("/texture.jpg");
+var alpha = new THREE.TextureLoader().load("/alpha3.jpg");
 const material = new THREE.MeshBasicMaterial({
   //   color: "grey",
   map: texture1,
+  alphaMap: alpha,
+  transparent: true,
   // displacementMap: height,
   // displacementScale: height,
   flashShading: true,
@@ -141,8 +143,8 @@ controls.enableDamping = true;
 controls.panSpeed = 2;
 controls.screenSpacePanning = false;
 
-controls.minDistance = 1;
-controls.maxDistance = 40;
+// controls.minDistance = 1;
+// controls.maxDistance = 40;
 controls.maxPolarAngle = Math.PI / 2;
 
 controls.mouseButtons = {

@@ -16,11 +16,11 @@ scene.background = new THREE.Color(0xb5b0b0);
 const geometry = new THREE.PlaneBufferGeometry(100, 100);
 geometry.rotateX(4.7);
 var texture1 = new THREE.TextureLoader().load("/replace.jpg");
-const height = loader.load("/displ.jpg");
+// const height = loader.load("/displ.jpg");
 const material = new THREE.MeshBasicMaterial({
   //   color: "grey",
   map: texture1,
-  displacementMap: height,
+  // displacementMap: height,
   // displacementScale: height,
   flashShading: true,
 });

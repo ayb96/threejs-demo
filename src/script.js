@@ -11,7 +11,7 @@ const canvas = document.querySelector("canvas.webgl");
 
 // Scene
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0xcdc7b7);
+scene.background = new THREE.Color(0xe8e0cd);
 // Map
 const geometry = new THREE.PlaneBufferGeometry(800, 800);
 geometry.rotateX(4.7);
@@ -145,7 +145,7 @@ controls.enableDamping = true;
 controls.panSpeed = 4;
 controls.screenSpacePanning = false;
 
-controls.minDistance = 100``;
+controls.minDistance = 100;
 controls.maxDistance = 800;
 controls.maxPolarAngle = Math.PI / 2;
 

@@ -2,7 +2,7 @@ import "./style.css";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import * as dat from "dat.gui";
-
+import { Object3D } from "three";
 // Debug
 const gui = new dat.GUI();
 
@@ -15,28 +15,31 @@ scene.background = new THREE.Color(0xe8e0cd);
 // Map
 const geometry = new THREE.PlaneBufferGeometry(800, 800);
 geometry.rotateX(4.7);
-var texture1 = new THREE.TextureLoader().load("/qtr.jpeg");
+var texture1 = new THREE.TextureLoader().load("/highrezmap.jpg");
 var alpha = new THREE.TextureLoader().load("/alpha3.jpg");
-var normalmap = new THREE.TextureLoader().load("/NormalMap(1).png");
+var normalMap = new THREE.TextureLoader().load("/alpha2.jpg");
 const material = new THREE.MeshBasicMaterial({
   //   color: "grey",
   map: texture1,
   alphaMap: alpha,
-  normalmap: normalmap,
   transparent: true,
-  // displacementMap: height,
-  // displacementScale: height,
-  flashShading: true,
+  normalmap: normalMap,
+  displacementMap: normalMap,
+  // displacementScale: 20,
+  // flashShading: true,
 });
 const museumMap = new THREE.Mesh(geometry, material);
 museumMap.position.set(0, -10, 0);
 scene.add(museumMap);
+const settings = {
+  playhead: 0.001,
+};
 var raycaster = new THREE.Raycaster();
 var mouse = new THREE.Vector2();
 // Pointers
-const geometry2 = new THREE.BoxGeometry(4, 4, 4, 4, 4, 4);
+const geometry2 = new THREE.BoxGeometry(4, 4, 4);
 // var texture2 = new THREE.TextureLoader().load("/texture.jpg");
-const material2 = new THREE.MeshBasicMaterial({ color: "grey" });
+const material2 = new THREE.MeshBasicMaterial({ color: "green" });
 const cube = new THREE.Mesh(geometry2, material2);
 cube.position.x = 0;
 cube.position.y = -7;
@@ -45,7 +48,7 @@ scene.add(cube);
 
 const geometry3 = new THREE.BoxGeometry(4, 4, 4, 4, 4, 4);
 // var texture2 = new THREE.TextureLoader().load("/texture.jpg");
-const material3 = new THREE.MeshBasicMaterial({ color: "grey" });
+const material3 = new THREE.MeshBasicMaterial({ color: "green" });
 const cube1 = new THREE.Mesh(geometry3, material3);
 cube1.position.x = 30;
 cube1.position.y = -7;
@@ -54,7 +57,7 @@ scene.add(cube1);
 
 const geometry4 = new THREE.BoxGeometry(4, 4, 4, 4, 4, 4);
 // var texture2 = new THREE.TextureLoader().load("/texture.jpg");
-const material4 = new THREE.MeshBasicMaterial({ color: "grey" });
+const material4 = new THREE.MeshBasicMaterial({ color: "green" });
 const cube2 = new THREE.Mesh(geometry4, material4);
 cube2.position.x = 10;
 cube2.position.y = -7;
@@ -136,6 +139,7 @@ const camera = new THREE.PerspectiveCamera(
 camera.position.x = 0;
 camera.position.y = 200;
 camera.position.z = 685;
+// camera.lookAt(100, 50, 60);
 // camera.rotation.set(50, 50, 50);
 scene.add(camera);
 
@@ -154,7 +158,9 @@ controls.mouseButtons = {
   MIDDLE: THREE.MOUSE.DOLLY,
   LEFT: THREE.MOUSE.PAN,
 };
+
 // controls.update();
+
 /**
  * Renderer
  */
@@ -169,7 +175,15 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
  */
 
 const clock = new THREE.Clock();
-
+const bezier = new THREE.CubicBezierCurve3(
+  new THREE.Vector3(-0.5, 0.55, 0),
+  new THREE.Vector3(-0.5, 0.1, 0),
+  new THREE.Vector3(-0.45, 0.1, 0),
+  new THREE.Vector3(0, 0.1, 0)
+);
+// const target = new Object3D();
+// target.position.y = 0.1;
+// this.scene.add(target);
 const tick = () => {
   // const elapsedTime = clock.getElapsedTime();
 
@@ -178,8 +192,15 @@ const tick = () => {
 
   // Update Orbital Controls
   controls.update();
-  // hoverPieces();
 
+  // const playhead = settings.playhead;
+  // target.position.x = playhead * 0.5;
+  // camera.lookAt(target.position);
+  // const pos = bezier.getPoint(playhead);
+  // camera.position.set(pos.x, pos.y, pos.z);
+  // console.log(pos);
+  // hoverPieces();
+  // camera.lookAt(200, 50, 60);
   // Render
   renderer.render(scene, camera);
 

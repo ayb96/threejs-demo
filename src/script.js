@@ -229,7 +229,8 @@ const tick = () => {
   controls.update();
   targetX = mouseX * 0.001;
   // targetY = mouseY * 0.001;
-  museumMap.position.x = 20 * targetX;
+  museumMap.position.x += (-50 * targetX - museumMap.position.x) / 10;
+  // museumMap.position.y = 20 * targetY;
   // cube.position.x = 10 * targetX;
   // cube1.position.x = 10 * targetX;
   // cube2.position.x = 10 * targetX;

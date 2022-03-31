@@ -37,39 +37,51 @@ const settings = {
 var raycaster = new THREE.Raycaster();
 var mouse = new THREE.Vector2();
 // Pointers
-const geometry2 = new THREE.BoxGeometry(4, 4, 4);
+const geometry2 = new THREE.PlaneBufferGeometry(400, 400);
 // var texture2 = new THREE.TextureLoader().load("/texture.jpg");
-const material2 = new THREE.MeshBasicMaterial({ color: "green" });
+const material2 = new THREE.MeshBasicMaterial({ color: "blue" });
 const cube = new THREE.Mesh(geometry2, material2);
-cube.position.x = 0;
+cube.position.x = 450;
 cube.position.y = 0;
-cube.position.z = -30;
+cube.position.z = -50;
 scene.add(cube);
+cube.rotation.x = -Math.PI / 2;
+gui.add(cube.rotation, "x").min(-3).max(3).step(0.05);
+// usage:
 
-const geometry3 = new THREE.BoxGeometry(4, 4, 4, 4, 4, 4);
+// cube.rotation.set(new THREE.Vector3(0, 0, -Math.PI / 2));
+
+// gui.add(cube.rotation, "x");
+
+//
+const geometry3 = new THREE.PlaneBufferGeometry(400, 400);
 // var texture2 = new THREE.TextureLoader().load("/texture.jpg");
 const material3 = new THREE.MeshBasicMaterial({ color: "green" });
 const cube1 = new THREE.Mesh(geometry3, material3);
-cube1.position.x = 30;
-cube1.position.y = 100;
-cube1.position.z = 40;
+cube1.position.x = -200;
+cube1.position.y = 0;
+cube1.position.z = -600;
+cube1.rotation.x = -Math.PI / 2;
+// cube.material.transparent = true;
+// cube.material.opacity = 1;
 scene.add(cube1);
 
-const geometry4 = new THREE.BoxGeometry(4, 4, 4, 4, 4, 4);
+const geometry4 = new THREE.PlaneBufferGeometry(400, 400);
 // var texture2 = new THREE.TextureLoader().load("/texture.jpg");
 const material4 = new THREE.MeshBasicMaterial({ color: "green" });
 const cube2 = new THREE.Mesh(geometry4, material4);
-cube2.position.x = 10;
+cube2.position.x = -700;
 cube2.position.y = 0;
-cube2.position.z = 10;
+cube2.position.z = 510;
 scene.add(cube2);
+cube2.rotation.x = -Math.PI / 2;
 
 let btn1 = document.querySelector(".btn1");
 btn1.addEventListener("click", function (event) {
   camera.position.x = 0;
   // camera.lookAt(0, -7, -30);
   cube.material.transparent = true;
-  cube.material.opacity = 0.3;
+  cube.material.opacity = 1;
   cube.material.color.setHex(0xff0000);
 });
 let btn2 = document.querySelector(".btn2");
@@ -133,7 +145,7 @@ document.body.addEventListener("click", onMouseMove);
 const camera = new THREE.PerspectiveCamera(
   30,
   sizes.width / sizes.height,
-  0.1,
+  1,
   5000
 );
 camera.position.x = 0;
@@ -151,7 +163,7 @@ controls.panSpeed = 3;
 controls.screenSpacePanning = false;
 
 controls.minDistance = 100;
-controls.maxDistance = 1800;
+controls.maxDistance = 2800;
 controls.maxPolarAngle = Math.PI / 2;
 
 controls.mouseButtons = {
@@ -198,7 +210,6 @@ const windowHalfY = window.innerHeight / 2;
 function onDocumentMouseMove(event) {
   mouseX = event.clientX - windowHalfX;
   mouseY = event.clientY - windowHalfY;
-  console.log(mouseX);
 }
 const tick = () => {
   // const elapsedTime = clock.getElapsedTime();
@@ -209,15 +220,15 @@ const tick = () => {
   // Update Orbital Controls
   controls.update();
   targetX = mouseX * 0.001;
-  targetY = mouseY * 0.001;
+  // targetY = mouseY * 0.001;
   museumMap.position.x = 10 * targetX;
-  cube.position.x = 10 * targetX;
-  cube1.position.x = 10 * targetX;
-  cube2.position.x = 10 * targetX;
-  museumMap.position.y = 10 * targetY;
-  cube.position.y = 10 * targetY;
-  cube1.position.y = 10 * targetY;
-  cube2.position.y = 10 * targetY;
+  // cube.position.x = 10 * targetX;
+  // cube1.position.x = 10 * targetX;
+  // cube2.position.x = 10 * targetX;
+  // museumMap.position.y = 10 * targetY;
+  // cube.position.y = 10 * targetY;
+  // cube1.position.y = 10 * targetY;
+  // cube2.position.y = 10 * targetY;
 
   // const playhead = settings.playhead;
   // target.position.x = playhead * 0.5;

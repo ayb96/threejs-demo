@@ -131,7 +131,7 @@ document.body.addEventListener("click", onMouseMove);
  */
 // Base camera
 const camera = new THREE.PerspectiveCamera(
-  50,
+  30,
   sizes.width / sizes.height,
   0.1,
   5000

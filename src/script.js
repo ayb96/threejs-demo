@@ -42,11 +42,13 @@ const geometry2 = new THREE.PlaneBufferGeometry(400, 400);
 const material2 = new THREE.MeshBasicMaterial({ color: "blue" });
 const cube = new THREE.Mesh(geometry2, material2);
 cube.position.x = 450;
-cube.position.y = 0;
+cube.position.y = 10;
 cube.position.z = -50;
 scene.add(cube);
 cube.rotation.x = -Math.PI / 2;
-gui.add(cube.rotation, "x").min(-3).max(3).step(0.05);
+// cube.material.transparent = true;
+// cube.material.opacity = 0;
+// gui.add(cube.rotation, "x").min(-3).max(3).step(0.05);
 // usage:
 
 // cube.rotation.set(new THREE.Vector3(0, 0, -Math.PI / 2));
@@ -59,29 +61,31 @@ const geometry3 = new THREE.PlaneBufferGeometry(400, 400);
 const material3 = new THREE.MeshBasicMaterial({ color: "green" });
 const cube1 = new THREE.Mesh(geometry3, material3);
 cube1.position.x = -200;
-cube1.position.y = 0;
+cube1.position.y = 1;
 cube1.position.z = -600;
 cube1.rotation.x = -Math.PI / 2;
-// cube.material.transparent = true;
-// cube.material.opacity = 1;
-scene.add(cube1);
 
+scene.add(cube1);
+// cube1.material.transparent = true;
+// cube1.material.opacity = 0.5;
 const geometry4 = new THREE.PlaneBufferGeometry(400, 400);
 // var texture2 = new THREE.TextureLoader().load("/texture.jpg");
 const material4 = new THREE.MeshBasicMaterial({ color: "green" });
 const cube2 = new THREE.Mesh(geometry4, material4);
 cube2.position.x = -700;
-cube2.position.y = 0;
+cube2.position.y = 0.2;
 cube2.position.z = 510;
 scene.add(cube2);
 cube2.rotation.x = -Math.PI / 2;
+cube2.material.transparent = true;
+cube2.material.opacity = 0.5;
 
 let btn1 = document.querySelector(".btn1");
 btn1.addEventListener("click", function (event) {
   camera.position.x = 0;
   // camera.lookAt(0, -7, -30);
   cube.material.transparent = true;
-  cube.material.opacity = 1;
+  cube.material.opacity = 0.5;
   cube.material.color.setHex(0xff0000);
 });
 let btn2 = document.querySelector(".btn2");
@@ -133,8 +137,12 @@ function onMouseMove(event) {
   raycaster.setFromCamera(mouse, camera);
 
   var intersects = raycaster.intersectObjects(scene.children, true);
-  for (var i = 0; i < intersects.length; i++) {
-    console.log("testttt");
+
+  for (var i = 1; i < intersects.length; i++) {
+    // cube2.material.transparent = true;
+    cube.material.opacity = 0.7;
+    cube2.material.opacity = 0.7;
+    cube1.material.opacity = 0.7;
   }
 }
 document.body.addEventListener("click", onMouseMove);
@@ -145,7 +153,7 @@ document.body.addEventListener("click", onMouseMove);
 const camera = new THREE.PerspectiveCamera(
   30,
   sizes.width / sizes.height,
-  1,
+  0.5,
   5000
 );
 camera.position.x = 0;
@@ -198,7 +206,7 @@ const bezier = new THREE.CubicBezierCurve3(
 // target.position.y = 0.1;
 // this.scene.add(target);
 document.addEventListener("mousemove", onDocumentMouseMove);
-
+document.addEventListener("onwheel", (event) => console.info("wcwcwdcwcw"));
 let mouseX = 0;
 let mouseY = 0;
 let targetX = 0;
@@ -221,7 +229,7 @@ const tick = () => {
   controls.update();
   targetX = mouseX * 0.001;
   // targetY = mouseY * 0.001;
-  museumMap.position.x = 10 * targetX;
+  museumMap.position.x = 20 * targetX;
   // cube.position.x = 10 * targetX;
   // cube1.position.x = 10 * targetX;
   // cube2.position.x = 10 * targetX;

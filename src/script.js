@@ -230,6 +230,9 @@ const tick = () => {
   targetX = mouseX * 0.001;
   targetY = mouseY * 0.001;
   museumMap.position.x += (-50 * targetX - museumMap.position.x) / 10;
+  cube1.position.x += (-50 * targetX - museumMap.position.x) / 10;
+  cube.position.x += (-50 * targetX - museumMap.position.x) / 10;
+  cube2.position.x += (-50 * targetX - museumMap.position.x) / 10;
   museumMap.position.y += (-50 * targetY - museumMap.position.y) / 10;
   cube.position.y += (-50 * targetY - museumMap.position.y) / 10;
   cube1.position.y += (-50 * targetY - museumMap.position.y) / 10;

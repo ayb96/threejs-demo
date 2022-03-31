@@ -61,7 +61,7 @@ const geometry3 = new THREE.PlaneBufferGeometry(400, 400);
 const material3 = new THREE.MeshBasicMaterial({ color: "green" });
 const cube1 = new THREE.Mesh(geometry3, material3);
 cube1.position.x = -200;
-cube1.position.y = 1;
+cube1.position.y = 0;
 cube1.position.z = -600;
 cube1.rotation.x = -Math.PI / 2;
 
@@ -73,12 +73,12 @@ const geometry4 = new THREE.PlaneBufferGeometry(400, 400);
 const material4 = new THREE.MeshBasicMaterial({ color: "green" });
 const cube2 = new THREE.Mesh(geometry4, material4);
 cube2.position.x = -700;
-cube2.position.y = 0.2;
+cube2.position.y = 10;
 cube2.position.z = 510;
 scene.add(cube2);
 cube2.rotation.x = -Math.PI / 2;
-cube2.material.transparent = true;
-cube2.material.opacity = 0;
+// cube2.material.transparent = true;
+// cube2.material.opacity = 0;
 
 let btn1 = document.querySelector(".btn1");
 btn1.addEventListener("click", function (event) {
@@ -153,8 +153,8 @@ document.body.addEventListener("click", onMouseMove);
 const camera = new THREE.PerspectiveCamera(
   30,
   sizes.width / sizes.height,
-  0.5,
-  5000
+  1,
+  4000
 );
 camera.position.x = 0;
 camera.position.y = 2000;

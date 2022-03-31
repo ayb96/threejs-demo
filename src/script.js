@@ -42,7 +42,7 @@ const geometry2 = new THREE.BoxGeometry(4, 4, 4);
 const material2 = new THREE.MeshBasicMaterial({ color: "green" });
 const cube = new THREE.Mesh(geometry2, material2);
 cube.position.x = 0;
-cube.position.y = -7;
+cube.position.y = 0;
 cube.position.z = -30;
 scene.add(cube);
 
@@ -51,7 +51,7 @@ const geometry3 = new THREE.BoxGeometry(4, 4, 4, 4, 4, 4);
 const material3 = new THREE.MeshBasicMaterial({ color: "green" });
 const cube1 = new THREE.Mesh(geometry3, material3);
 cube1.position.x = 30;
-cube1.position.y = -7;
+cube1.position.y = 100;
 cube1.position.z = 40;
 scene.add(cube1);
 
@@ -60,7 +60,7 @@ const geometry4 = new THREE.BoxGeometry(4, 4, 4, 4, 4, 4);
 const material4 = new THREE.MeshBasicMaterial({ color: "green" });
 const cube2 = new THREE.Mesh(geometry4, material4);
 cube2.position.x = 10;
-cube2.position.y = -7;
+cube2.position.y = 0;
 cube2.position.z = 10;
 scene.add(cube2);
 
@@ -184,6 +184,21 @@ const bezier = new THREE.CubicBezierCurve3(
 // const target = new Object3D();
 // target.position.y = 0.1;
 // this.scene.add(target);
+document.addEventListener("mousemove", onDocumentMouseMove);
+
+let mouseX = 0;
+let mouseY = 0;
+let targetX = 0;
+let targetY = 0;
+
+const windowHalfX = window.innerWidth / 2;
+const windowHalfY = window.innerHeight / 2;
+
+function onDocumentMouseMove(event) {
+  mouseX = event.clientX - windowHalfX;
+  mouseY = event.clientY - windowHalfY;
+  console.log(mouseX);
+}
 const tick = () => {
   // const elapsedTime = clock.getElapsedTime();
 
@@ -192,6 +207,16 @@ const tick = () => {
 
   // Update Orbital Controls
   controls.update();
+  targetX = mouseX * 0.001;
+  targetY = mouseY * 0.001;
+  museumMap.position.x = 10 * targetX;
+  cube.position.x = 10 * targetX;
+  cube1.position.x = 10 * targetX;
+  cube2.position.x = 10 * targetX;
+  museumMap.position.y = 10 * targetY;
+  cube.position.y = 10 * targetY;
+  cube1.position.y = 10 * targetY;
+  cube2.position.y = 10 * targetY;
 
   // const playhead = settings.playhead;
   // target.position.x = playhead * 0.5;
@@ -209,6 +234,32 @@ const tick = () => {
 };
 
 tick();
+////
+//
+//
+//
+//
+//
+////
+//
+//
+//
+//
+////
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 //////////// POPUP ////////////
 const openModalButtons = document.querySelectorAll("[data-modal-target]");
 const closeModalButtons = document.querySelectorAll("[data-close-button]");

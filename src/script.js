@@ -13,7 +13,7 @@ const canvas = document.querySelector("canvas.webgl");
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0xe8e0cd);
 // Map
-const geometry = new THREE.PlaneBufferGeometry(800, 800);
+const geometry = new THREE.PlaneBufferGeometry(4800, 2718);
 geometry.rotateX(4.7);
 var texture1 = new THREE.TextureLoader().load("/highrezmap.jpg");
 var alpha = new THREE.TextureLoader().load("/alpha3.jpg");
@@ -131,14 +131,15 @@ document.body.addEventListener("click", onMouseMove);
  */
 // Base camera
 const camera = new THREE.PerspectiveCamera(
-  30,
+  50,
   sizes.width / sizes.height,
   0.1,
-  2000
+  5000
 );
 camera.position.x = 0;
-camera.position.y = 200;
+camera.position.y = 2000;
 camera.position.z = 685;
+
 // camera.lookAt(100, 50, 60);
 // camera.rotation.set(50, 50, 50);
 scene.add(camera);
@@ -146,11 +147,11 @@ scene.add(camera);
 // Controls
 const controls = new OrbitControls(camera, canvas);
 controls.enableDamping = true;
-controls.panSpeed = 4;
+controls.panSpeed = 3;
 controls.screenSpacePanning = false;
 
 controls.minDistance = 100;
-controls.maxDistance = 800;
+controls.maxDistance = 1800;
 controls.maxPolarAngle = Math.PI / 2;
 
 controls.mouseButtons = {

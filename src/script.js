@@ -78,7 +78,7 @@ cube2.position.z = 510;
 scene.add(cube2);
 cube2.rotation.x = -Math.PI / 2;
 cube2.material.transparent = true;
-cube2.material.opacity = 0.5;
+cube2.material.opacity = 0;
 
 let btn1 = document.querySelector(".btn1");
 btn1.addEventListener("click", function (event) {
